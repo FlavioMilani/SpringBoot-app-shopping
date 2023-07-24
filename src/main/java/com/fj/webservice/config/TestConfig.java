@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.fj.webservice.entities.Category;
 import com.fj.webservice.entities.Order;
+import com.fj.webservice.entities.OrderItem;
 import com.fj.webservice.entities.Product;
 import com.fj.webservice.entities.User;
 import com.fj.webservice.entities.enums.OrderStatus;
 import com.fj.webservice.repositories.CategoryRepository;
+import com.fj.webservice.repositories.OrderItemRepository;
 import com.fj.webservice.repositories.OrderRepository;
 import com.fj.webservice.repositories.ProductRepository;
 import com.fj.webservice.repositories.UserRepository;
@@ -33,6 +35,10 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
+	
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -71,7 +77,11 @@ public class TestConfig implements CommandLineRunner{
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	}
-	
-	
 }
