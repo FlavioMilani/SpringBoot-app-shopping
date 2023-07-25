@@ -101,6 +101,14 @@ public class Order implements Serializable{
 		this.payment = payment;
 	}
 
+	public Double getTotal() {
+		Double tot = 0.0;
+		for(OrderItem oi : items) {
+			tot += oi.getSubTotal();
+		}
+		return tot;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
